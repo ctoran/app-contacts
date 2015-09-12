@@ -8,13 +8,27 @@ var paths = require('../paths');
 var compilerOptions = require('../babel-options');
 var assign = Object.assign || require('object.assign');
 var notify = require("gulp-notify");
+var ts = require('gulp-typescript');
+var tsProject = ts.createProject('tsconfig.json', {
+  typescript: require('typescript'),
+});
 
 gulp.task('build-system', function(callback) {
   return runSequence(
-    //'build-ts',
-    'build-js',
+    'build-ts',
+    //'build-js',
     callback
   );
+});
+
+// gulp-typescript compiles TS files directly into ES5
+gulp.task('build-ts', function () {
+  var tsResult = gulp.src([paths.tsSource, paths.tsxSource, paths.jspmDefinitions, paths.typings])
+    .pipe(sourcemaps.init())
+    .pipe(ts(tsProject));
+  return tsResult.js
+    .pipe(sourcemaps.write({includeContent: false, sourceRoot: paths.sourceMapRelativePath}))
+    .pipe(gulp.dest(paths.output));
 });
 
 // transpiles changed ES6 files to SystemJS format
