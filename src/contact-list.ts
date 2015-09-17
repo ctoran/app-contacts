@@ -1,13 +1,14 @@
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {WebAPI} from './web-api';
+import {WebAPI,Contact} from './web-api';
 import {ContactUpdated, ContactViewed} from './messages';
+import {ContactDetail} from './contact-detail';
 
 export class ContactList {
   static inject = [WebAPI, EventAggregator];
-  constructor(api, ea){
-    this.api = api;
-    this.contacts = [];
+  contacts: Contact[] = [];
+  selectedId: number;
 
+  constructor(public api: WebAPI, ea: EventAggregator) {
     ea.subscribe(ContactViewed, msg => this.select(msg.contact));
     ea.subscribe(ContactUpdated, msg => {
       let id = msg.contact.id;
@@ -16,13 +17,13 @@ export class ContactList {
     });
   }
 
-  created(){
+  created(): void {
     this.api.getContactList().then(contacts => {
       this.contacts = contacts;
     });
   }
 
-  select(contact){
+  select(contact: Contact) {
     this.selectedId = contact.id;
     return true;
   }

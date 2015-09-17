@@ -1,11 +1,19 @@
 let latency = 0;
 let id = 0;
 
-function getId(){
+function getId() {
   return ++id;
 }
 
-let contacts = [
+export interface Contact {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+}
+
+let contacts: Contact[] = [
   {
     id:getId(),
     firstName:'John',
@@ -44,23 +52,26 @@ let contacts = [
 ];
 
 export class WebAPI {
-  getContactList(){
+  isRequesting: boolean;
+
+  getContactList(): Promise<Contact[]> {
     this.isRequesting = true;
     return new Promise(resolve => {
       setTimeout(() => {
-        let results = contacts.map(x =>  { return {
-          id:x.id,
-          firstName:x.firstName,
-          lastName:x.lastName,
-          email:x.email
-        }});
+        let results = contacts.map(x => <Contact>{
+          id: x.id,
+          firstName: x.firstName,
+          lastName: x.lastName,
+          email: x.email,
+          phoneNumber: x.phoneNumber
+        });
         resolve(results);
         this.isRequesting = false;
       }, latency);
     });
   }
 
-  getContactDetails(id){
+  getContactDetails(id: number): Promise<Contact> {
     this.isRequesting = true;
     return new Promise(resolve => {
       setTimeout(() => {
@@ -71,17 +82,17 @@ export class WebAPI {
     });
   }
 
-  saveContact(contact){
+  saveContact(contact: Contact): Promise<Contact> {
     this.isRequesting = true;
-    return new Promise(resolve => {
+    return new Promise<Contact>(resolve => {
       setTimeout(() => {
         let instance = JSON.parse(JSON.stringify(contact));
         let found = contacts.filter(x => x.id == contact.id)[0];
 
-        if(found){
+        if (found) {
           let index = contacts.indexOf(found);
           contacts[index] = instance;
-        }else{
+        } else {
           instance.id = getId();
           contacts.push(instance);
         }

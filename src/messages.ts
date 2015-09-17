@@ -1,11 +1,11 @@
+import {Contact} from './web-api';
+
 export class ContactUpdated {
-  constructor(contact){
-    this.contact = contact;
+  constructor(public contact: Contact) {
   }
 }
 
 export class ContactViewed {
-  constructor(contact){
-    this.contact = contact;
+  constructor(public contact: Contact) {
   }
 }

@@ -5,10 +5,10 @@ import {bindable, noView} from 'aurelia-framework';
 export class LoadingIndicator {
   @bindable loading = false;
 
-  loadingChanged(newValue){
-    if(newValue){
+  loadingChanged(newValue: boolean) {
+    if(newValue) {
       nprogress.start();
-    }else{
+    } else {
       nprogress.done();
     }
   }
