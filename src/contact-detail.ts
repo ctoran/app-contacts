@@ -1,11 +1,12 @@
+import {autoinject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {RouteConfig} from 'aurelia-app';
 import {WebAPI,Contact} from './web-api';
 import {ContactUpdated,ContactViewed} from './messages';
 import {areEqual} from './utility';
 
+@autoinject
 export class ContactDetail {
-  static inject = [WebAPI, EventAggregator];
   constructor(public api: WebAPI, public ea: EventAggregator) {
   }
 

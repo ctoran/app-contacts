@@ -1,14 +1,15 @@
+import {autoinject} from 'aurelia-framework';
 import {AureliaApp} from 'aurelia-app';
 import {Router, RouterConfiguration} from 'aurelia-router';
 import {WebAPI} from './web-api';
 import 'bootstrap/css/bootstrap.css!';
 import 'font-awesome/css/font-awesome.css!';
 
+@autoinject
 export class App implements AureliaApp {
   router: Router;
   api: WebAPI;
 
-  static inject = [WebAPI];
   constructor(api: WebAPI) {
     this.api = api;
   }

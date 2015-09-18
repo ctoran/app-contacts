@@ -1,10 +1,11 @@
+import {autoinject} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {WebAPI,Contact} from './web-api';
 import {ContactUpdated, ContactViewed} from './messages';
 import {ContactDetail} from './contact-detail';
 
+@autoinject
 export class ContactList {
-  static inject = [WebAPI, EventAggregator];
   contacts: Contact[] = [];
   selectedId: number;
 
