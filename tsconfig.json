@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "noLib": true,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "noEmitOnError": false,
