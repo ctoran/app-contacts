@@ -18,10 +18,8 @@ export class ContactList {
     });
   }
 
-  created(): void {
-    this.api.getContactList().then(contacts => {
-      this.contacts = contacts;
-    });
+  async created() {
+    this.contacts = await this.api.getContactList();
   }
 
   select(contact: Contact) {

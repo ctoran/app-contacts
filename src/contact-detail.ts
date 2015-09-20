@@ -13,25 +13,21 @@ export class ContactDetail {
   contact: Contact;
   originalContact: Contact;
 
-  activate(params: any, config: RouteConfig) {
-    return this.api.getContactDetails(params.id).then(contact => {
-      this.contact = contact;
-      config.navModel.setTitle(contact.firstName);
-      this.originalContact = JSON.parse(JSON.stringify(contact));
-      this.ea.publish(new ContactViewed(contact));
-    });
+  async activate(params: any, config: RouteConfig) {
+    this.contact = await this.api.getContactDetails(params.id);
+    config.navModel.setTitle(this.contact.firstName);
+    this.originalContact = JSON.parse(JSON.stringify(this.contact));
+    this.ea.publish(new ContactViewed(this.contact));
   }
 
   get canSave() {
     return this.contact.firstName && this.contact.lastName && !this.api.isRequesting;
   }
 
-  save() {
-    this.api.saveContact(this.contact).then(contact => {
-      this.contact = contact;
-      this.originalContact = JSON.parse(JSON.stringify(contact));
-      this.ea.publish(new ContactUpdated(this.contact));
-    });
+  async save() {
+    this.contact = await this.api.saveContact(this.contact);
+    this.originalContact = JSON.parse(JSON.stringify(this.contact));
+    this.ea.publish(new ContactUpdated(this.contact));
   }
 
   canDeactivate() {

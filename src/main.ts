@@ -1,5 +1,6 @@
 import {Aurelia} from 'aurelia-framework';
 import 'bootstrap';
+import 'babel/polyfill';
 
 export function configure(aurelia: Aurelia) {
   aurelia.use
