@@ -54,13 +54,13 @@ let contacts: Contact[] = [
 export class WebAPI {
   isRequesting: boolean;
 
-  async wait(msecs: number) {
-    return new Promise(resolve => setTimeout(resolve, msecs));
+  sleep(msecs: number) {
+    return new Promise((resolve: any) => setTimeout(resolve, msecs));
   }
   
   async simulateLatency() {
       this.isRequesting = true;
-      await this.wait(latency);
+      await this.sleep(latency);
       this.isRequesting = false;
   }
   

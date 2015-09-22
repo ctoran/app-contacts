@@ -40,7 +40,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.24",
     "bootstrap": "github:twbs/bootstrap@3.3.5",
     "core-js": "npm:core-js@1.1.4",
-    "css": "github:systemjs/plugin-css@0.1.16",
+    "css": "github:systemjs/plugin-css@0.1.17",
     "font-awesome": "npm:font-awesome@4.4.0",
     "nprogress": "github:rstacruz/nprogress@0.2.0",
     "github:aurelia/animator-css@0.16.0": {
@@ -160,7 +160,7 @@ System.config({
       "process": "npm:process@0.10.1"
     },
     "github:rstacruz/nprogress@0.2.0": {
-      "css": "github:systemjs/plugin-css@0.1.16"
+      "css": "github:systemjs/plugin-css@0.1.17"
     },
     "github:twbs/bootstrap@3.3.5": {
       "jquery": "github:components/jquery@2.1.4"
@@ -179,7 +179,7 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:font-awesome@4.4.0": {
-      "css": "github:systemjs/plugin-css@0.1.16"
+      "css": "github:systemjs/plugin-css@0.1.17"
     }
   }
 });
